@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <meta charset="UTF-8">
+
 <title>WELCOME TO POKER WORLD!</title>
 <style>
-
 body {
 	width: 960px;
 	margin: 20px auto;
@@ -20,15 +25,16 @@ body {
 	background: url(pokercard.jpg);
 	width: 960px;
 	height: 600px;
-	float: right;
+	float: left;
 }
 
-.header{
-	background:url(mainlogo.jpg);
+
+.header {
+	background: url(mainlogo.jpg);
 	background-color: #000000;
 	background-repeat: no-repeat;
 	height: 100px;
-} 
+}
 
 .footer {
 	height: 100px;
@@ -37,13 +43,16 @@ body {
 
 .clear {
 	clear: both;
-
 }
 </style>
 </head>
+
 <body>
 	<div class="header">
-	<a href='#' class='button'>LOGIN</a>
+		<p>
+			<span style="float: right">
+				<button class="btn btn-large btn-primary" type="button">로그인</button> </span>
+		</p>
 	</div>
 	<div class="container">
 		<div class="content">컨텐트</div>
@@ -51,8 +60,5 @@ body {
 	</div>
 	<div class="clear"></div>
 	<div class="footer">푸터</div>
-
-
-
 </body>
 </html>
