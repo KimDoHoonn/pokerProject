@@ -11,30 +11,38 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     
     <!-- 프론트 컨트롤러에서는 오직 페이지 컨트롤러와 웹 관련 객체만 관리한다. -->
-    <context:component-scan base-package="example.controller">
-      <context:exclude-filter type="regex" 
-                              expression="example.controller.json.*"/>
-    </context:component-scan>
+    <context:component-scan base-package="example.controller.json"/>
     
     <mvc:annotation-driven/>
      
-    <!-- 기존의 ViewResolver를 교체한다. 
-         이 뷰리졸버는 JSP를 찾을 때 WEB-INF/view 아래에서 찾는다.
-         즉 페이지 컨트롤러가 리턴한 값에 대해
-         /WEB-INF/view/ + 리턴한값 + .jsp = JSP 경로
+    <!-- 기존의 ViewResolver를 협상 역할을 하는 뷰리졸버로 교체한다. 
+         => 교체하는 방법은 그냥 그 타입의 객체를 등록하면 된다.
     -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/view/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <!--  
+		    <property name="viewResolvers">
+		        <list>
+		            <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+		            <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		                <property name="prefix" value="/WEB-INF/jsp/"/>
+		                <property name="suffix" value=".jsp"/>
+		            </bean>
+		        </list>
+		    </property>
+		    -->
+		    <property name="defaultViews">
+		        <list>
+		            <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+		        </list>
+		    </property>
+		</bean>
     
     <!-- 멀티파트 요청 데이터를 처리할 객체를 등록한다. -->
     <bean id="multipartResolver"
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- 업로드할 수 있는 파일의 최대 크기 설정(바이트) -->
         <property name="maxUploadSize" value="10000000"/>
-    </bean>
+    </bean> 
 </beans>
 
 
